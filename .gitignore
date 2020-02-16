@@ -3,3 +3,4 @@
 *.lock
 doc/api
 build
+coverage
