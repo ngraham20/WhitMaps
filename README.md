@@ -1,6 +1,9 @@
-# swe_project
+# SWE_project-name-tba
 
-A new Flutter project.
+[![Build Status](https://travis-ci.org/ngraham20/swe-project-name-tba.svg?branch=feature-basic-project-structure)](https://travis-ci.org/ngraham20/swe-project-name-tba)
+[![codecov](https://codecov.io/gh/ngraham20/swe-project-name-tba/branch/develop/graph/badge.svg)](https://codecov.io/gh/ngraham20/swe-project-name-tba)
+
+This is the default flutter project
 
 ## Getting Started
 
