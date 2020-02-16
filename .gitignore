@@ -2,3 +2,4 @@
 .packages
 *.lock
 doc/api
+build
