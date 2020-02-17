@@ -1,6 +1,11 @@
+# Dart files
 .dart_tool
 .packages
 *.lock
-doc/api
+
+# Generated files
 build
 coverage
+doc/api
+.vscode
+.idea
