@@ -1,7 +1,7 @@
 # SWE_project-name-tba
 
-[![Build Status](https://travis-ci.org/ngraham20/swe-project-name-tba.svg?branch=feature-basic-project-structure)](https://travis-ci.org/ngraham20/swe-project-name-tba)
-[![codecov](https://codecov.io/gh/ngraham20/swe-project-name-tba/branch/develop/graph/badge.svg)](https://codecov.io/gh/ngraham20/swe-project-name-tba)
+[![Build Status](https://travis-ci.org/ngraham20/whitmaps.svg?branch=master)](https://travis-ci.org/ngraham20/whitmaps)
+[![codecov](https://codecov.io/gh/ngraham20/whitmaps/branch/master/graph/badge.svg)](https://codecov.io/gh/ngraham20/whitmaps)
 
 This is the default flutter project
 
