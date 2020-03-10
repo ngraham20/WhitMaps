@@ -17,7 +17,24 @@ class BottomNavDrawerState extends State<BottomNavDrawer> {
     "Phone book"
   ];
 
-  _showDrawer() {
+  int _selectedIndex = 0;
+  static const TextStyle optionStyle = TextStyle(fontSize: 30, fontWeight: FontWeight.bold);
+  static const List<Widget> _widgetOptions = <Widget>[
+    Text(
+      'Index 0: Menu',
+      style: optionStyle,
+    ),
+    Text(
+      'Index 1: Schedule',
+      style: optionStyle,
+    ),
+  ];
+
+  _showDrawer(int index) {
+    setState(() {
+      _selectedIndex = index;
+    });
+
     showModalBottomSheet(
         context: context,
         builder: (context) {
@@ -45,22 +62,25 @@ class BottomNavDrawerState extends State<BottomNavDrawer> {
       appBar: AppBar(
         title: Text("WhitMaps Home"),
       ),
-      bottomNavigationBar: BottomAppBar(
-        child: Container(
-          padding: EdgeInsets.symmetric(horizontal: 10.0),
-          height: 50.0,
-          child: Row(
-            children: <Widget>[
-              IconButton(
-                icon: Icon(Icons.menu),
-                onPressed: _showDrawer,
-              )
-            ],
-          ),
-        ),
-      ),
+
       body: Center(
         child: Text('Google Map here'),
+      ),
+
+      bottomNavigationBar: BottomNavigationBar(
+        items: const <BottomNavigationBarItem>[
+          BottomNavigationBarItem(
+            icon: Icon(Icons.menu),
+            title: Text('Menu'),
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.calendar_today),
+            title: Text('Schedule'),
+          ),
+        ],
+        currentIndex: _selectedIndex,
+        selectedItemColor: Colors.amber[800],
+        onTap: _showDrawer,
       ),
     );
   }
