@@ -1,48 +1,88 @@
 import 'package:flutter/material.dart';
-     
-class Homepage extends StatefulWidget {
-  Homepage({Key key, this.title}) : super(key: key);
 
+class BottomNavDrawer extends StatefulWidget {
+  BottomNavDrawer({Key key, this.title}) : super(key: key);
   final String title;
 
   @override
-  _HomepageState createState() => _HomepageState();
+  BottomNavDrawerState createState() {
+    return new BottomNavDrawerState();
+  }
 }
 
-class _HomepageState extends State<Homepage> {
-  int _counter = 0;
+class BottomNavDrawerState extends State<BottomNavDrawer> {
+  static final List<String> _listViewData = [
+    "Search for a location",
+    "Route to Location",
+    "Phone book"
+  ];
 
-  void _incrementCounter() {
+  int _selectedIndex = 0;
+  static const TextStyle optionStyle = TextStyle(fontSize: 30, fontWeight: FontWeight.bold);
+  static const List<Widget> _widgetOptions = <Widget>[
+    Text(
+      'Index 0: Menu',
+      style: optionStyle,
+    ),
+    Text(
+      'Index 1: Schedule',
+      style: optionStyle,
+    ),
+  ];
+
+  _showDrawer(int index) {
     setState(() {
-      _counter++;
+      _selectedIndex = index;
     });
+
+    showModalBottomSheet(
+        context: context,
+        builder: (context) {
+          return Container(
+            child: ListView(
+              children: [
+                Column(
+                  mainAxisSize: MainAxisSize.min,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: _listViewData
+                      .map((data) => ListTile(
+                    title: Text(data),
+                  ))
+                      .toList(),
+                )
+              ],
+            ),
+          );
+        });
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(widget.title),
+        title: Text("WhitMaps Home"),
       ),
+
       body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            Text(
-              "You have pushed the button this many times: ",
-            ),
-            Text(
-              "$_counter",
-              style: Theme.of(context).textTheme.display1,
-            ),
-          ],
-        ),
+        child: Text('Google Map here'),
       ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: _incrementCounter,
-        tooltip: "Increment",
-        child: Icon(Icons.add),
+
+      bottomNavigationBar: BottomNavigationBar(
+        items: const <BottomNavigationBarItem>[
+          BottomNavigationBarItem(
+            icon: Icon(Icons.menu),
+            title: Text('Menu'),
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.calendar_today),
+            title: Text('Schedule'),
+          ),
+        ],
+        currentIndex: _selectedIndex,
+        selectedItemColor: Colors.amber[800],
+        onTap: _showDrawer,
       ),
     );
   }
 }
+
