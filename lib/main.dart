@@ -5,18 +5,6 @@ void main() => runApp(WhitMaps());
 
 class WhitMaps extends StatelessWidget {
   // This widget is the root of your application.
-  @override
-  _MyAppState createState() => _MyAppState();
-}
-
-class _MyAppState extends State<MyApp> {
-  GoogleMapController mapController;
-
-  final LatLng _center = const LatLng(45.521563, -122.677433);
-
-  void _onMapCreated(GoogleMapController controller) {
-    mapController = controller;
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -37,4 +25,4 @@ class _MyAppState extends State<MyApp> {
       home: BottomNavDrawer(title: 'Home'),
     );
   }
-} 
+}
