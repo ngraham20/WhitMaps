@@ -9,3 +9,5 @@ coverage
 doc/api
 .vscode
 .idea
+.flutter-plugins
+.flutter-plugins-dependencies
