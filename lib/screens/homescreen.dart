@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:whitmaps/screens/mapscreen.dart';
 
 class BottomNavDrawer extends StatefulWidget {
   BottomNavDrawer({Key key, this.title}) : super(key: key);
@@ -64,7 +65,7 @@ class BottomNavDrawerState extends State<BottomNavDrawer> {
       ),
 
       body: Center(
-        child: Text('Google Map here'),
+        child: MapScreen(),
       ),
 
       bottomNavigationBar: BottomNavigationBar(
