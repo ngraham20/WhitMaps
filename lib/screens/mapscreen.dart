@@ -9,7 +9,8 @@ class MapScreen extends StatefulWidget {
 class _MapScreenState extends State<MapScreen> {
   GoogleMapController mapController;
 
-  final LatLng _center = const LatLng(45.521563, -122.677433);
+  // center on Whitworth University
+  final LatLng _center = const LatLng(47.753481, -117.417527);
 
   void _onMapCreated(GoogleMapController controller) {
     mapController = controller;
