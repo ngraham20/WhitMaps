@@ -1,5 +1,6 @@
 import 'package:sqflite/sqflite.dart';
-import 'package:whitmaps/model/contact.dart';
+import 'package:whitmaps/models/contact.dart';
+import 'package:whitmaps/models/poi.dart';
 
 createDatabase() async {
   String databasesPath = await getDatabasesPath();
@@ -17,6 +18,10 @@ void initDB(Database db, int version) async {
         "email TEXT"
         ")");
 }
+
+//-----------------------------------------------------------
+//                       CONTACT
+//-----------------------------------------------------------
 
 Future<int> createContact(Database db, Contact contact) async {
   var result = await db.insert("Contact", contact.toMap());
@@ -54,6 +59,37 @@ Future<int> deleteContact(Database db, Contact contact) async {
   return await db.delete("Contact",
   where: 'name = ? and primary_phone = ?',
   whereArgs: [contact.name, contact.primaryPhone]
+  );
+}
+
+//-----------------------------------------------------------
+//                          POI
+//-----------------------------------------------------------
+
+Future<int> createPoi(Database db, Poi poi) async {
+  var result = await db.insert("Contact", poi.toMap());
+  return result;
+}
+
+Future<List> getPoi(Database db) async {
+  var result = await db.query("Poi", columns:
+  ["latitude", "longitude", "name",
+   "description", "floorplanImagePath",
+   "numParkingSpaces"]);
+  return result.toList();
+}
+
+Future<int> updatePoi(Database db, Poi poi) async {
+  return await db.update("Contact",
+    poi.toMap(),
+    where: 'latitude = ? and longitude = ?',
+    whereArgs: [poi.latitude, poi.longitude]);
+}
+
+Future<int> deletePoi(Database db, Poi poi) async {
+  return await db.delete("Contact",
+  where: 'latitude = ? and longitude = ?',
+  whereArgs: [poi.latitude, poi.longitude]
   );
 }
 

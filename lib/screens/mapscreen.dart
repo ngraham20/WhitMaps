@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
-import 'package:whitmaps/model/whitmap.dart';
+import 'package:whitmaps/models/whitmap.dart';
 
 class MapScreen extends StatefulWidget {
   @override
