@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
+import 'package:whitmaps/model/whitmap.dart';
 
 class MapScreen extends StatefulWidget {
   @override
@@ -8,12 +9,19 @@ class MapScreen extends StatefulWidget {
 
 class _MapScreenState extends State<MapScreen> {
   GoogleMapController mapController;
-
-  // center on Whitworth University
-  final LatLng _center = const LatLng(47.753481, -117.417527);
+  WhitMap map;
 
   void _onMapCreated(GoogleMapController controller) {
     mapController = controller;
+  }
+
+  _MapScreenState() {
+    // center on Whitworth University
+    map = new WhitMap(
+      latitude: 47.753481,
+      longitude: -117.417527,
+      zoom: 13.0,
+    );
   }
 
   @override
@@ -21,8 +29,8 @@ class _MapScreenState extends State<MapScreen> {
     return GoogleMap(
         onMapCreated: _onMapCreated,
         initialCameraPosition: CameraPosition(
-          target: _center,
-          zoom: 13.0,
+          target: LatLng(map.latitude, map.longitude),
+          zoom: map.zoom,
         )
     );
   }
