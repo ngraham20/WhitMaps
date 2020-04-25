@@ -56,3 +56,7 @@ Future<int> deleteContact(Database db, Contact contact) async {
   whereArgs: [contact.name, contact.primaryPhone]
   );
 }
+
+void closeDatabase(Database db) async {
+  await db.close();
+}
