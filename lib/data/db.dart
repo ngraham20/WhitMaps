@@ -13,11 +13,21 @@ class DB {
     }
 
   static void initDB(Database db, int version) async {
-    await db.execute("CREATE TABLE Customer ("
-          "id INTEGER PRIMARY KEY,"
-          "first_name TEXT,"
-          "last_name TEXT,"
-          "email TEXT"
+    await db.execute("CREATE TABLE Contact ("
+          "name TEXT PRIMARY KEY,"
+          "primary_phone TEXT PRIMARY KEY,"
+          "home_phone TEXT,"
+          "office_phone TEXT"
+          "mobiel_phone TEXT"
+          ")"
+          
+          "CREATE TABLE Poi ("
+          "latitude TEXT PRIMARY KEY"
+          "longitude TEXT PRIMARY KEY"
+          "name TEXT"
+          "description TEXT"
+          "floorplan_image_path TEXT"
+          "num_parking_spaces TEXT"
           ")");
   }
 
