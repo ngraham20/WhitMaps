@@ -76,8 +76,8 @@ class DB {
   static Future<List> getPoi(Database db) async {
     var result = await db.query("Poi", columns:
     ["latitude", "longitude", "name",
-    "description", "floorplanImagePath",
-    "numParkingSpaces"]);
+    "description", "floorplan_image_path",
+    "num_parking_spaces"]);
     return result.toList();
   }
 
