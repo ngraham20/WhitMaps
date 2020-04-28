@@ -6,7 +6,7 @@ import 'package:whitmaps/models/poi.dart';
 class DB {
   static createDatabase() async {
     String databasesPath = await getDatabasesPath();
-    String dbPath = databasesPath + 'my.db';
+    String dbPath = databasesPath + 'whitmaps.db';
 
     var database = await openDatabase(dbPath, version: 1, onCreate: initDB);
     return database;
