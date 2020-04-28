@@ -8,11 +8,40 @@ class MapScreen extends StatefulWidget {
 }
 
 class _MapScreenState extends State<MapScreen> {
+
+  BitmapDescriptor pinLocationIcon;
+  Set<Marker> _markers = {};
   GoogleMapController mapController;
   WhitMap map;
 
   void _onMapCreated(GoogleMapController controller) {
     mapController = controller;
+
+    LatLng pinPosition = LatLng(
+    map.latitude,
+    map.longitude
+   );
+    setState(() {
+      _markers.add(
+        Marker(
+          markerId: MarkerId('<MARKER_ID'),
+          position: pinPosition,
+          icon: pinLocationIcon
+        )
+      );
+    });
+  }
+
+  @override
+  void initState() {
+      super.initState();
+      setCustomMapPin();
+  }
+
+  void setCustomMapPin() async {
+    pinLocationIcon = await BitmapDescriptor.fromAssetImage(
+      ImageConfiguration(devicePixelRatio: 2.5),
+      'assets/purplecheck.png');
   }
 
   _MapScreenState() {
@@ -27,11 +56,13 @@ class _MapScreenState extends State<MapScreen> {
   @override
   Widget build(BuildContext context) {
     return GoogleMap(
-        onMapCreated: _onMapCreated,
-        initialCameraPosition: CameraPosition(
-          target: LatLng(map.latitude, map.longitude),
-          zoom: map.zoom,
-        )
+      myLocationEnabled: true,
+      markers: _markers,
+      onMapCreated: _onMapCreated,
+      initialCameraPosition: CameraPosition(
+        target: LatLng(map.latitude, map.longitude),
+        zoom: map.zoom,
+      )
     );
   }
 } 
