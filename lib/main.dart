@@ -22,7 +22,7 @@ class WhitMaps extends StatelessWidget {
         // is not restarted.
         primarySwatch: Colors.green,
       ),
-      home: BottomNavDrawer(title: 'Home'),
+      home: new HomePage()
     );
   }
 }

@@ -2,7 +2,7 @@
 .dart_tool
 .packages
 *.lock
-
+.DS_STORE
 # Generated files
 build
 coverage
