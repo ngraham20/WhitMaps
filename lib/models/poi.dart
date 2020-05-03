@@ -1,3 +1,6 @@
+import 'package:flutter/material.dart';
+import 'package:google_maps_flutter/google_maps_flutter.dart';
+
 class Poi {
   double latitude;
   double longitude;
@@ -5,6 +8,7 @@ class Poi {
   String description;
   String floorplanImagePath;
   int numParkingSpaces;
+  BitmapDescriptor pinLocationIcon;
 
   Poi({
     this.latitude,
@@ -32,4 +36,18 @@ class Poi {
     "floorplanImagePath": floorplanImagePath,
     "numParkingSpaces": numParkingSpaces,
   };
+
+  Marker toMarker() {
+    return Marker(
+      markerId: MarkerId('<MARKER_ID'),
+      position: LatLng(latitude, longitude),
+      icon: pinLocationIcon
+    );
+  }
+
+  void setCustomMapPin() async {
+    pinLocationIcon = await BitmapDescriptor.fromAssetImage(
+      ImageConfiguration(devicePixelRatio: 2.5),
+      'assets/purplecheck.png');
+  }
 }
