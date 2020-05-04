@@ -1,7 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:whitmaps/screens/mapscreen.dart';
 
-class FirstFragment extends StatelessWidget {
+
+class FirstFragment extends StatefulWidget {
+  @override 
+  FirstFragmentState createState() => FirstFragmentState();
+}
+
+class FirstFragmentState extends State<FirstFragment> {
   @override
   Widget build(BuildContext context) {
     // TODO: implement build
@@ -13,7 +19,4 @@ class FirstFragment extends StatelessWidget {
       ),
     );
   }
-
-
 }
-
