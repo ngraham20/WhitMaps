@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:whitmaps/models/directory.dart';
+import 'package:whitmaps/models/contact.dart';
 
-final List<String> entries = <String>['Main Phone', 'Security', 'Facilities'];
-final List<int> colorCodes = <int>[600, 500, 100];
+final List<Contact> entries = Directory.getPhoneDirectory();
+
 
 class SecondFragment extends StatefulWidget {
   @override 
@@ -11,7 +13,6 @@ class SecondFragment extends StatefulWidget {
 class SecondFragmentState extends State<SecondFragment> {
   @override
   Widget build(BuildContext context) {
-    // TODO: implement build
     return new Center(
       child: new Scaffold(
         body: Center(
@@ -21,7 +22,8 @@ class SecondFragmentState extends State<SecondFragment> {
           itemBuilder: (BuildContext context, int index) {
             return Container(
               height: 50,
-              child: Center(child: Text('${entries[index]}')),
+              color: Colors.green[200],
+              child: Center(child: Text(formatContactInfo(entries[index]),style: TextStyle(fontWeight: FontWeight.bold))),
             );
           },
           separatorBuilder: (BuildContext context, int index) => const Divider(),
@@ -30,7 +32,12 @@ class SecondFragmentState extends State<SecondFragment> {
       ),
     );
   }
+  String formatContactInfo(Contact contact) {
+    return contact.name + "  Ext. " + contact.primaryPhone.substring(6,10);
+  }
 }
 
 
 
+
+  

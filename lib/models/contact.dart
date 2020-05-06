@@ -13,6 +13,8 @@ class Contact {
     this.officePhone
   });
 
+  Contact.phoneDirectory(this.name, this.primaryPhone);
+
   factory Contact.fromJson(Map<String, dynamic> data) => new Contact(
     name: data["name"],
     primaryPhone: data["primaryPhone"],
@@ -28,4 +30,5 @@ class Contact {
     "mobilePhone": mobilePhone,
     "officePhone": officePhone,
   };
+
 }

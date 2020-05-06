@@ -44,4 +44,24 @@ class Directory {
       }
     }
   }
+  //alphabetize??
+  static List<Contact> getPhoneDirectory() {
+    List<Contact> importantPlacesList = [
+      new Contact.phoneDirectory("Main Office", "5097771000"),
+      new Contact.phoneDirectory("Campus Security", "5097774444"),
+      new Contact.phoneDirectory("Facilities", "5097773254"),
+      new Contact.phoneDirectory("Registrar", "5097773205"),
+      new Contact.phoneDirectory("Student Life", "5097773271"),
+      new Contact.phoneDirectory("Post Office", "5097773279"),
+      new Contact.phoneDirectory("Housing Office", "5097774533"),
+      new Contact.phoneDirectory("Health Center", "5097773259"),
+      new Contact.phoneDirectory("HUB Info Desk", "5097773796"),
+      new Contact.phoneDirectory("Student Accounting", "5097774340"),
+      new Contact.phoneDirectory("IT Help Desk", "5097773911"),
+      new Contact.phoneDirectory("Library", "5097773260"),
+      new Contact.phoneDirectory("URec", "5097773734"),
+      new Contact.phoneDirectory("Aquatic Center", "5097774778")
+    ];
+    return importantPlacesList;
+  }
 }
