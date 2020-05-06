@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:whitmaps/models/directory.dart';
 import 'package:whitmaps/models/contact.dart';
 
-final List<Contact> entries = Directory.getPhoneDirectory();
+final List<Contact> entries = Directory.getPhoneBookList();
 
 
 class SecondFragment extends StatefulWidget {
@@ -17,13 +17,28 @@ class SecondFragmentState extends State<SecondFragment> {
       child: new Scaffold(
         body: Center(
           child: ListView.separated(
-          padding: const EdgeInsets.all(8),
           itemCount: entries.length,
           itemBuilder: (BuildContext context, int index) {
             return Container(
               height: 50,
               color: Colors.green[200],
-              child: Center(child: Text(formatContactInfo(entries[index]),style: TextStyle(fontWeight: FontWeight.bold))),
+              padding: const EdgeInsets.fromLTRB(30,8,30,8),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Center(
+                    child: Text(entries[index].name,
+                    style: TextStyle(fontWeight: FontWeight.bold)
+                    )
+                  ),
+                  RaisedButton(
+                    onPressed: (){},
+                    textColor: Colors.black, 
+                    child: Text("Call " + formatPhone(entries[index])
+                    )
+                  )
+                ]
+              )
             );
           },
           separatorBuilder: (BuildContext context, int index) => const Divider(),
@@ -32,8 +47,9 @@ class SecondFragmentState extends State<SecondFragment> {
       ),
     );
   }
-  String formatContactInfo(Contact contact) {
-    return contact.name + "  Ext. " + contact.primaryPhone.substring(6,10);
+  
+  String formatPhone(Contact contact) {
+    return "(" + contact.primaryPhone.substring(0,3) + ") " + contact.primaryPhone.substring(3,6) + "-" + contact.primaryPhone.substring(6,10);
   }
 }
 
