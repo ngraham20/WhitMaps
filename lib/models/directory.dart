@@ -76,11 +76,11 @@ class Directory {
       new Contact.phoneDirectory("Kelly Olivier", "5097774533"),
       new Contact.phoneDirectory("Paul MacDonald", "5097773259"),
       new Contact.phoneDirectory("Abdul Haq", "5097773796"),
-      new Contact.phoneDirectory("Lorelai Hannover", "5097774340"),
-      new Contact.phoneDirectory("Steven Zemke", "5097773911"),
       new Contact.phoneDirectory("Marth Gady", "5097773260"),
       new Contact.phoneDirectory("Kent Jones", "5097773734"),
       new Contact.phoneDirectory("Jude Battista", "5097774778"),
+      new Contact.phoneDirectory("Lorelai Hannover", "5097774340"),
+      new Contact.phoneDirectory("Steven Zemke", "5097773911"),
       new Contact.phoneDirectory("Adam King", "5097771000"),
       new Contact.phoneDirectory("Denise Cradburry", "5097774444"),
     ];
