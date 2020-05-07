@@ -16,7 +16,7 @@ class HomePage extends StatefulWidget {
     new DrawerItem("WhitMaps", Icons.map),
     new DrawerItem("Phone Book", Icons.phone),
     new DrawerItem("Directory", Icons.contacts),
-    new DrawerItem("Sign Out", Icons.person)
+    new DrawerItem("POI", Icons.pin_drop)
   ];
 
   @override

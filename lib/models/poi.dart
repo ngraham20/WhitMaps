@@ -32,4 +32,15 @@ class Poi {
     "floorplanImagePath": floorplanImagePath,
     "numParkingSpaces": numParkingSpaces,
   };
+
+  static Poi getFakePOI() {
+    Poi poi = new Poi();
+    poi.name = "Eric Johnston Science Center";
+    poi.longitude = null;
+    poi.latitude = null;
+    poi.description = "Home to the Math/CS, Physics, and part of the Biology department. Dedicated in 1966, this building houses the main labs for plant and animal biology, physics and the computer labs for CS classes, as well as the second largest lecture hall on campus.";
+    poi.floorplanImagePath = null;
+    poi.numParkingSpaces = null;
+    return poi;
+  }
 }
