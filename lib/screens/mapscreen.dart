@@ -39,7 +39,10 @@ class _MapScreenState extends State<MapScreen> {
           Marker(
             markerId: MarkerId(poi.name),
             position: LatLng(poi.latitude, poi.longitude),
-            icon: icon
+            icon: icon,
+            onTap: () {
+              // TODO @Kelly put tap function here
+            }
           )
         );
       });
