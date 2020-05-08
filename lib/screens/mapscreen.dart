@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
+import 'package:whitmaps/models/poi.dart';
 import 'package:whitmaps/models/whitmap.dart';
 
 class MapScreen extends StatefulWidget {
@@ -9,39 +10,67 @@ class MapScreen extends StatefulWidget {
 
 class _MapScreenState extends State<MapScreen> {
 
-  BitmapDescriptor pinLocationIcon;
+  BitmapDescriptor officeIcon;
+  BitmapDescriptor rhIcon;
+  BitmapDescriptor defaultPin;
   Set<Marker> _markers = {};
+  Set<Poi> _pois = {};
   GoogleMapController mapController;
   WhitMap map;
 
   void _onMapCreated(GoogleMapController controller) {
     mapController = controller;
+    for (var poi in _pois) {
+      var icon;
+      switch (poi.type) {
+        case "OFFICE":
+          icon = officeIcon;
+          break;
+        case "RESIDENCE_HALL":
+          icon = rhIcon;
+          break;
+        default:
+          icon = defaultPin;
+          break;
+        }
 
-    LatLng pinPosition = LatLng(
-    map.latitude,
-    map.longitude
-   );
-    setState(() {
-      _markers.add(
-        Marker(
-          markerId: MarkerId('<MARKER_ID'),
-          position: pinPosition,
-          icon: pinLocationIcon
-        )
-      );
-    });
+      setState(() {
+        _markers.add(
+          Marker(
+            markerId: MarkerId(poi.name),
+            position: LatLng(poi.latitude, poi.longitude),
+            icon: icon
+          )
+        );
+      });
+    }
   }
 
   @override
   void initState() {
       super.initState();
-      setCustomMapPin();
+      setOfficePin();
+      setRHPin();
+      setDefaultPin();
+      _pois = Poi.getPois();
   }
 
-  void setCustomMapPin() async {
-    pinLocationIcon = await BitmapDescriptor.fromAssetImage(
+  void setOfficePin() async {
+    officeIcon = await BitmapDescriptor.fromAssetImage(
       ImageConfiguration(devicePixelRatio: 2.5),
-      'assets/purplecheck.png');
+      'assets/office-32.png');
+  }
+
+  void setRHPin() async {
+    rhIcon = await BitmapDescriptor.fromAssetImage(
+    ImageConfiguration(devicePixelRatio: 2.5),
+    'assets/residence-hall-32.png');
+  }
+
+  void setDefaultPin() async {
+    defaultPin = await BitmapDescriptor.fromAssetImage(
+    ImageConfiguration(devicePixelRatio: 2.5),
+    'assets/purplecheck.png');
   }
 
   _MapScreenState() {
