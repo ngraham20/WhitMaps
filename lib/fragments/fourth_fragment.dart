@@ -56,42 +56,42 @@ class FourthFragmentState extends State<FourthFragment> {
                 )
               ),
               SizedBox(height: 8),
-              Container( //poi office directory
-                padding: EdgeInsets.all(10),
-                decoration: BoxDecoration(
-                  border: Border.all(color: Colors.greenAccent)
-                ),
-                child:Center(
-                  child: Column(
-                    children: <Widget>[
-                      Text("Office Directory", textAlign: TextAlign.left, style: TextStyle(fontSize: 16.0, fontWeight: FontWeight.bold)),
-                      Center(
-                        child: ListView.separated(
-                          itemCount: dummyPoiOffices.length,
-                          itemBuilder: (BuildContext context, int index) {
-                            return Container(
-                              height: 50,
-                              color: Colors.green[200],
-                              padding: const EdgeInsets.fromLTRB(30,8,30,8),
-                              child: Row(
-                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                children: [
-                                  Center(
-                                    child: Text(dummyPoiOffices[index],
-                                    style: TextStyle(fontWeight: FontWeight.bold)
-                                    )
-                                  ),
-                                ]
-                              )
-                            );
-                          },
-                          separatorBuilder: (BuildContext context, int index) => const Divider(),
-                        )
-                      ),
-                    ],
-                  )
-                )
-              )
+              // Container( //poi office directory
+              //   padding: EdgeInsets.all(10),
+              //   decoration: BoxDecoration(
+              //     border: Border.all(color: Colors.greenAccent)
+              //   ),
+              //   child:Center(
+              //     child: Column(
+              //       children: <Widget>[
+              //         Text("Office Directory", textAlign: TextAlign.left, style: TextStyle(fontSize: 16.0, fontWeight: FontWeight.bold)),
+              //         Center(
+              //           child: ListView.separated(
+              //             itemCount: dummyPoiOffices.length,
+              //             itemBuilder: (BuildContext context, int index) {
+              //               return Container(
+              //                 height: 50,
+              //                 color: Colors.green[200],
+              //                 padding: const EdgeInsets.fromLTRB(30,8,30,8),
+              //                 child: Row(
+              //                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              //                   children: [
+              //                     Center(
+              //                       child: Text(dummyPoiOffices[index],
+              //                       style: TextStyle(fontWeight: FontWeight.bold)
+              //                       )
+              //                     ),
+              //                   ]
+              //                 )
+              //               );
+              //             },
+              //             separatorBuilder: (BuildContext context, int index) => const Divider(),
+              //           )
+              //         ),
+              //       ],
+              //     )
+              //   )
+              // )
             ]
           ),
         )
