@@ -22,12 +22,12 @@ class DB {
           ")"
           
           "CREATE TABLE Poi ("
-          "latitude TEXT PRIMARY KEY"
-          "longitude TEXT PRIMARY KEY"
+          "latitude INTEGER PRIMARY KEY"
+          "longitude INTEGER PRIMARY KEY"
           "name TEXT"
           "description TEXT"
-          "floorplan_image_path TEXT"
-          "num_parking_spaces TEXT"
+          "poi_image TEXT"
+          "type TEXT"
           ")");
   }
 
@@ -86,8 +86,8 @@ class DB {
   static Future<List> getPoi(Database db) async {
     var result = await db.query("Poi", columns:
     ["latitude", "longitude", "name",
-    "description", "floorplan_image_path",
-    "num_parking_spaces"]);
+    "description", "poi_image",
+    "type"]);
     return result.toList();
   }
 
