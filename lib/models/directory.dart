@@ -1,5 +1,4 @@
 import 'dart:collection';
-
 import 'package:sqflite/sqflite.dart';
 import 'package:whitmaps/data/db.dart';
 import 'package:whitmaps/models/contact.dart';

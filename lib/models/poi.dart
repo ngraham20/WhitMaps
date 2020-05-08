@@ -3,16 +3,15 @@ class Poi {
   double longitude;
   String name;
   String description;
-  String floorplanImagePath;
-  int numParkingSpaces;
-
+  String poiImage;
+  String type;
   Poi({
     this.latitude,
     this.longitude,
     this.name,
     this.description,
-    this.floorplanImagePath,
-    this.numParkingSpaces
+    this.poiImage,
+    this.type,
   });
 
   factory Poi.fromJson(Map<String, dynamic> data) => new Poi(
@@ -20,8 +19,8 @@ class Poi {
     longitude: data["longitude"],
     name: data["name"],
     description: data["description"],
-    floorplanImagePath: data["floorplanImagePath"],
-    numParkingSpaces: data["numParkingSpaces"],
+    poiImage: data["poi_image"],
+    type: data["type"],
   );
 
   Map<String, dynamic> toMap() => {
@@ -29,7 +28,21 @@ class Poi {
     "longitude": longitude,
     "name": name,
     "description": description,
-    "floorplanImagePath": floorplanImagePath,
-    "numParkingSpaces": numParkingSpaces,
+    "poi_image": poiImage,
+    "type": type,
   };
+
+  static Set<Poi> getPois() {
+    return {
+      Poi(latitude: 47.753481,
+      longitude: -117.417527,
+      name: "1",
+      type: "OFFICE",
+      ),
+      Poi(latitude: 47.752671,
+      longitude: -117.417714,
+      name: "2",
+      type: "RESIDENCE_HALL"),
+    };
+  }
 }
