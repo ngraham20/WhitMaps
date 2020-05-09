@@ -5,6 +5,7 @@ class Poi {
   String description;
   String poiImage;
   String type;
+  bool   interactive;
   Poi({
     this.latitude,
     this.longitude,
@@ -12,6 +13,7 @@ class Poi {
     this.description,
     this.poiImage,
     this.type,
+    this.interactive
   });
 
   factory Poi.fromJson(Map<String, dynamic> data) => new Poi(
@@ -33,20 +35,18 @@ class Poi {
   };
 
   static Poi getFakePOI() {
-    Poi poi = new Poi();
-    poi.name = "Eric Johnston Science Center";
-    poi.longitude = null;
-    poi.latitude = null;
-    poi.description = "Home to the Math/CS, Physics, and part of the Biology department. Dedicated in 1966, this building houses the main labs for plant and animal biology, physics and the computer labs for CS classes, as well as the second largest lecture hall on campus.";
-    return poi;
+    return Poi(
+      name: "Eric Johnson Science Center",
+      latitude: 47.753481,
+      longitude: -117.417527,
+      type: "OFFICE",
+      interactive: true,
+      description: "Home to the Math/CS, Physics, and part of the Biology department. Dedicated in 1966, this building houses the main labs for plant and animal biology, physics and the computer labs for CS classes, as well as the second largest lecture hall on campus."
+    );
   }
   static Set<Poi> getPois() {
     return {
-      Poi(latitude: 47.753481,
-      longitude: -117.417527,
-      name: "1",
-      type: "OFFICE",
-      ),
+      getFakePOI(),
       Poi(latitude: 47.752671,
       longitude: -117.417714,
       name: "2",
