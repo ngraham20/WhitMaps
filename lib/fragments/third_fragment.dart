@@ -49,7 +49,7 @@ class ThirdFragmentState extends State<ThirdFragment> {
                 itemBuilder: (BuildContext context, int index) {
                   return Container(
                     height: 50,
-                    color: Colors.green[200],
+                    //color: Colors.red[200],
                     padding: const EdgeInsets.fromLTRB(30,8,30,8),
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -61,7 +61,8 @@ class ThirdFragmentState extends State<ThirdFragment> {
                         ),
                         RaisedButton(
                           onPressed: (){},
-                          textColor: Colors.black, 
+                          color: Colors.red,
+                          textColor: Colors.white, 
                           child: Text("Call " + formatPhone(entries[index])
                           )
                         )
