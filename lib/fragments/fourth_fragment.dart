@@ -17,10 +17,11 @@ class PoiScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return new WillPopScope(
       child: new Scaffold(
+        
         body: FourthFragment()
       ),
       onWillPop: () {
-        return new Future(() => false);
+        return new Future(() => true);
       },
     );
   }
@@ -36,18 +37,21 @@ class FourthFragmentState extends State<FourthFragment> {
   Widget build(BuildContext context) {
     return new Center(
       child: new Scaffold(
+        appBar: new AppBar(
+          title: Text(Poi.getFakePOI().name, style: TextStyle(color: Colors.white))
+        ),
         body: Container(
           padding: EdgeInsets.all(10), 
           child: Column(
             children: <Widget>[
-              Container( //Poi name
-                padding: EdgeInsets.all(10),
-                color: Colors.red,
-                child: Center(
-                  child: Text(Poi.getFakePOI().name, style: TextStyle(color: Colors.white, fontSize: 18.0, fontWeight: FontWeight.bold))
-                )
-              ),
-              SizedBox(height: 8),
+              // Container( //Poi name
+              //   padding: EdgeInsets.all(10),
+              //   color: Colors.red,
+              //   child: Center(
+              //     child: Text(Poi.getFakePOI().name, style: TextStyle(color: Colors.white, fontSize: 18.0, fontWeight: FontWeight.bold))
+              //   )
+              // ),
+              // SizedBox(height: 8),
               Container( //building image
                 padding: EdgeInsets.all(10),
                 child:Center(
