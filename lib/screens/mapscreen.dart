@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:whitmaps/models/poi.dart';
 import 'package:whitmaps/models/whitmap.dart';
+import 'package:whitmaps/fragments/fourth_fragment.dart';
 
 class MapScreen extends StatefulWidget {
   @override
@@ -41,7 +42,7 @@ class _MapScreenState extends State<MapScreen> {
             position: LatLng(poi.latitude, poi.longitude),
             icon: icon,
             onTap: () {
-              // TODO @Kelly put tap function here
+              Navigator.of(context).push(new PoiScreenRoute());
             }
           )
         );

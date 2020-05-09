@@ -8,6 +8,24 @@ final List<String> dummyPoiOffices = [
   "Matthew Bell 120",
 ];
 
+class PoiScreenRoute extends MaterialPageRoute {
+  PoiScreenRoute() : super(builder: (context) => new PoiScreen());
+}
+
+class PoiScreen extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return new WillPopScope(
+      child: new Scaffold(
+        body: FourthFragment()
+      ),
+      onWillPop: () {
+        return new Future(() => false);
+      },
+    );
+  }
+}
+
 class FourthFragment extends StatefulWidget {
   @override 
   FourthFragmentState createState() => FourthFragmentState();
@@ -24,9 +42,9 @@ class FourthFragmentState extends State<FourthFragment> {
             children: <Widget>[
               Container( //Poi name
                 padding: EdgeInsets.all(10),
-                color: Colors.greenAccent,
+                color: Colors.red,
                 child: Center(
-                  child: Text(Poi.getFakePOI().name, style: TextStyle(fontSize: 18.0, fontWeight: FontWeight.bold))
+                  child: Text(Poi.getFakePOI().name, style: TextStyle(color: Colors.white, fontSize: 18.0, fontWeight: FontWeight.bold))
                 )
               ),
               SizedBox(height: 8),
@@ -44,7 +62,7 @@ class FourthFragmentState extends State<FourthFragment> {
               Container( //poi description
                 padding: EdgeInsets.all(10),
                 decoration: BoxDecoration(
-                  border: Border.all(color: Colors.greenAccent)
+                  border: Border.all(color: Colors.red)
                 ),
                 child:Center(
                   child: Column(
