@@ -1,4 +1,7 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
+import 'package:geolocator/geolocator.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:whitmaps/models/poi.dart';
 import 'package:whitmaps/models/whitmap.dart';
@@ -13,10 +16,12 @@ class _MapScreenState extends State<MapScreen> {
   BitmapDescriptor officeIcon;
   BitmapDescriptor rhIcon;
   BitmapDescriptor defaultPin;
+  BitmapDescriptor yahPin;
   Set<Marker> _markers = {};
   Set<Poi> _pois = {};
   GoogleMapController mapController;
   WhitMap map;
+  Position _currentPosition;
 
   void _onMapCreated(GoogleMapController controller) {
     mapController = controller;
@@ -58,6 +63,12 @@ class _MapScreenState extends State<MapScreen> {
       _pois = Poi.getPois();
   }
 
+  void inityahPin() {
+    setState(() {
+      Timer.periodic(Duration(seconds: 3), (Timer t) => setState((){}));
+    });
+  }
+
   void setOfficePin() async {
     officeIcon = await BitmapDescriptor.fromAssetImage(
       ImageConfiguration(devicePixelRatio: 2.5),
@@ -74,6 +85,26 @@ class _MapScreenState extends State<MapScreen> {
     defaultPin = await BitmapDescriptor.fromAssetImage(
     ImageConfiguration(devicePixelRatio: 2.5),
     'assets/purplecheck.png');
+  }
+
+  void setYAHPin() async {
+    yahPin = await BitmapDescriptor.fromAssetImage(
+      ImageConfiguration(devicePixelRatio: 2.5),
+      'assets/purplecheck.png');
+  }
+
+  _getCurrentLocation() {
+    final Geolocator geolocator = Geolocator()..forceAndroidLocationManager;
+
+    geolocator
+      .getCurrentPosition(desiredAccuracy: LocationAccuracy.best)
+      .then((Position position) {
+        setState(() {
+          _currentPosition = position;
+        });
+      }).catchError((e) {
+        print(e);
+      });
   }
 
   _MapScreenState() {
