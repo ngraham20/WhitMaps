@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:whitmaps/fragments/first_fragment.dart';
-import 'package:whitmaps/fragments/fourth_fragment.dart';
 import 'package:whitmaps/fragments/second_fragment.dart';
 import 'package:whitmaps/fragments/third_fragment.dart';
-import 'package:whitmaps/screens/mapscreen.dart';
+
 
 class DrawerItem {
   String title;
@@ -16,7 +15,6 @@ class HomePage extends StatefulWidget {
     new DrawerItem("WhitMaps", Icons.map),
     new DrawerItem("Phone Book", Icons.phone),
     new DrawerItem("Directory", Icons.contacts),
-    new DrawerItem("POI", Icons.pin_drop)
   ];
 
   @override
@@ -36,9 +34,6 @@ class HomePageState extends State<HomePage> {
         return new SecondFragment();
       case 2:
         return new ThirdFragment();
-      case 3:
-        return new FourthFragment();
-
       default:
         return new Text("Error");
     }
