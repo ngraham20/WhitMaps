@@ -42,9 +42,13 @@ class _MapScreenState extends State<MapScreen> {
             position: LatLng(poi.latitude, poi.longitude),
             icon: icon,
             onTap: () {
+<<<<<<< HEAD
               if (poi.interactive == true) {
                 Navigator.of(context).push(new PoiScreenRoute());
               }
+=======
+              Navigator.of(context).push(new PoiScreenRoute());
+>>>>>>> Alt-colors-UI
             }
           )
         );
