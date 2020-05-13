@@ -47,19 +47,41 @@ class _MapScreenState extends State<MapScreen> {
             position: LatLng(poi.latitude, poi.longitude),
             icon: icon,
             onTap: () {
-<<<<<<< HEAD
-              if (poi.interactive == true) {
-                Navigator.of(context).push(new PoiScreenRoute());
-              }
-=======
               Navigator.of(context).push(new PoiScreenRoute());
->>>>>>> Alt-colors-UI
             }
           )
         );
       });
     }
+
+    setState(() {
+      _markers.add(
+        Marker(
+          markerId: MarkerId("YOUAREHERE"),
+          position: LatLng(_currentPosition.latitude, _currentPosition.longitude),
+          icon: defaultPin
+        )
+      );
+    });
   }
+
+void updateYAH(id, latitude, longitude){
+
+  final marker = _markers.firstWhere((item) => item.markerId == id);
+
+  Marker _marker = Marker(
+    markerId: marker.markerId,
+    onTap: marker.onTap,
+    position: LatLng(latitude, longitude),
+    icon: marker.icon,
+  );
+
+  setState(() {
+  //the marker is identified by the markerId and not with the index of the list
+    _markers.remove(marker);
+    _markers.add(_marker);
+  });
+}
 
   @override
   void initState() {
@@ -72,7 +94,9 @@ class _MapScreenState extends State<MapScreen> {
 
   void inityahPin() {
     setState(() {
-      Timer.periodic(Duration(seconds: 3), (Timer t) => setState((){}));
+      Timer.periodic(Duration(seconds: 3), (Timer t) => setState((){
+        _getCurrentLocation();
+      }));
     });
   }
 
