@@ -94,13 +94,9 @@ void updateYAH(id, latitude, longitude){
 
   void inityahPin() {
     setState(() {
-<<<<<<< HEAD
       Timer.periodic(Duration(seconds: 3), (Timer t) => setState((){
         _getCurrentLocation();
       }));
-=======
-      Timer.periodic(Duration(seconds: 3), (Timer t) => setState((){}));
->>>>>>> 2321fda3626a4b0c936c6c0e17cf587a2c96ef4a
     });
   }
 
