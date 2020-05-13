@@ -54,25 +54,27 @@ class _MapScreenState extends State<MapScreen> {
       });
     }
 
-    setState(() {
-      _markers.add(
-        Marker(
-          markerId: MarkerId("YOUAREHERE"),
-          position: LatLng(_currentPosition.latitude, _currentPosition.longitude),
-          icon: defaultPin
-        )
-      );
-    });
+    // setState(() {
+    //   _markers.add(
+    //     Marker(
+    //       markerId: MarkerId("YOUAREHERE"),
+    //       position: LatLng(map.latitude, map.longitude),
+    //       icon: defaultPin
+    //     )
+    //   );
+    // });
   }
 
-void updateYAH(id, latitude, longitude){
+void updateYAH(){
 
-  final marker = _markers.firstWhere((item) => item.markerId == id);
+
+  _getCurrentLocation();
+  final marker = _markers.firstWhere((item) => item.markerId == MarkerId("YOUAREHERE"));
 
   Marker _marker = Marker(
     markerId: marker.markerId,
     onTap: marker.onTap,
-    position: LatLng(latitude, longitude),
+    position: LatLng(_currentPosition.latitude, _currentPosition.longitude),
     icon: marker.icon,
   );
 
@@ -89,14 +91,15 @@ void updateYAH(id, latitude, longitude){
       setOfficePin();
       setRHPin();
       setDefaultPin();
+      inityahPin();
       _pois = Poi.getPois();
   }
 
   void inityahPin() {
-    setState(() {
-      Timer.periodic(Duration(seconds: 3), (Timer t) => setState((){
+    new Timer.periodic(Duration(seconds: 3), (Timer t) {
         _getCurrentLocation();
-      }));
+
+      // updateYAH();
     });
   }
 
