@@ -33,30 +33,30 @@ class _MapScreenState extends State<MapScreen> {
   }
 
   @override
-void dispose() {
-  _timer.cancel();
-  super.dispose();
-}
+  void dispose() {
+    _timer.cancel();
+    super.dispose();
+  }
 
-void updateYAH(){
+  void updateYAH(){
 
 
-//   _getCurrentLocation();
-//   final marker = _markers.firstWhere((item) => item.markerId == MarkerId("YOUAREHERE"));
+    _getCurrentLocation();
+    final marker = _markers.firstWhere((item) => item.markerId == MarkerId("YOUAREHERE"));
 
-//   Marker _marker = Marker(
-//     markerId: marker.markerId,
-//     onTap: marker.onTap,
-//     position: LatLng(_currentPosition.latitude, _currentPosition.longitude),
-//     icon: marker.icon,
-//   );
+    Marker _marker = Marker(
+      markerId: marker.markerId,
+      onTap: marker.onTap,
+      position: LatLng(_currentPosition.latitude, _currentPosition.longitude),
+      icon: marker.icon,
+    );
 
-//   setState(() {
-//   //the marker is identified by the markerId and not with the index of the list
-//     _markers.remove(marker);
-//     _markers.add(_marker);
-//   });
-// }
+    setState(() {
+    //the marker is identified by the markerId and not with the index of the list
+      _markers.remove(marker);
+      _markers.add(_marker);
+    });
+  }
 
   @override
   void initState() {
