@@ -24,6 +24,7 @@ class _MapScreenState extends State<MapScreen> {
   List<Poi> _pois = [];
   GoogleMapController mapController;
   WhitMap map;
+  Timer _timer;
   Position _currentPosition;
   // DB _db;
 
@@ -31,7 +32,13 @@ class _MapScreenState extends State<MapScreen> {
     mapController = controller;
   }
 
-// void updateYAH(){
+  @override
+void dispose() {
+  _timer.cancel();
+  super.dispose();
+}
+
+void updateYAH(){
 
 
 //   _getCurrentLocation();
@@ -104,7 +111,7 @@ class _MapScreenState extends State<MapScreen> {
   }
 
   void inityahPin() {
-    new Timer.periodic(Duration(seconds: 3), (Timer t) {
+    _timer = Timer.periodic(Duration(seconds: 3), (Timer t) {
         _getCurrentLocation();
       // updateYAH();
     });
