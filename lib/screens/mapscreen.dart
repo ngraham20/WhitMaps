@@ -1,7 +1,11 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
+import 'package:geolocator/geolocator.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:whitmaps/models/poi.dart';
 import 'package:whitmaps/models/whitmap.dart';
+import 'package:whitmaps/fragments/fourth_fragment.dart';
 
 class MapScreen extends StatefulWidget {
   @override
@@ -13,10 +17,13 @@ class _MapScreenState extends State<MapScreen> {
   BitmapDescriptor officeIcon;
   BitmapDescriptor rhIcon;
   BitmapDescriptor defaultPin;
+  BitmapDescriptor yahPin;
   Set<Marker> _markers = {};
   Set<Poi> _pois = {};
   GoogleMapController mapController;
   WhitMap map;
+  Timer _timer;
+  Position _currentPosition;
 
   void _onMapCreated(GoogleMapController controller) {
     mapController = controller;
@@ -41,13 +48,49 @@ class _MapScreenState extends State<MapScreen> {
             position: LatLng(poi.latitude, poi.longitude),
             icon: icon,
             onTap: () {
-              // TODO @Kelly put tap function here
+              Navigator.of(context).push(new PoiScreenRoute());
             }
           )
         );
       });
     }
+
+    // setState(() {
+    //   _markers.add(
+    //     Marker(
+    //       markerId: MarkerId("YOUAREHERE"),
+    //       position: LatLng(map.latitude, map.longitude),
+    //       icon: defaultPin
+    //     )
+    //   );
+    // });
   }
+
+  @override
+void dispose() {
+  _timer.cancel();
+  super.dispose();
+}
+
+void updateYAH(){
+
+
+  _getCurrentLocation();
+  final marker = _markers.firstWhere((item) => item.markerId == MarkerId("YOUAREHERE"));
+
+  Marker _marker = Marker(
+    markerId: marker.markerId,
+    onTap: marker.onTap,
+    position: LatLng(_currentPosition.latitude, _currentPosition.longitude),
+    icon: marker.icon,
+  );
+
+  setState(() {
+  //the marker is identified by the markerId and not with the index of the list
+    _markers.remove(marker);
+    _markers.add(_marker);
+  });
+}
 
   @override
   void initState() {
@@ -55,7 +98,16 @@ class _MapScreenState extends State<MapScreen> {
       setOfficePin();
       setRHPin();
       setDefaultPin();
+      inityahPin();
       _pois = Poi.getPois();
+  }
+
+  void inityahPin() {
+    _timer = Timer.periodic(Duration(seconds: 3), (Timer t) {
+        _getCurrentLocation();
+
+      // updateYAH();
+    });
   }
 
   void setOfficePin() async {
@@ -74,6 +126,26 @@ class _MapScreenState extends State<MapScreen> {
     defaultPin = await BitmapDescriptor.fromAssetImage(
     ImageConfiguration(devicePixelRatio: 2.5),
     'assets/purplecheck.png');
+  }
+
+  void setYAHPin() async {
+    yahPin = await BitmapDescriptor.fromAssetImage(
+      ImageConfiguration(devicePixelRatio: 2.5),
+      'assets/purplecheck.png');
+  }
+
+  _getCurrentLocation() {
+    final Geolocator geolocator = Geolocator()..forceAndroidLocationManager;
+
+    geolocator
+      .getCurrentPosition(desiredAccuracy: LocationAccuracy.best)
+      .then((Position position) {
+        setState(() {
+          _currentPosition = position;
+        });
+      }).catchError((e) {
+        print(e);
+      });
   }
 
   _MapScreenState() {
