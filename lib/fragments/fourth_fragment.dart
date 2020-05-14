@@ -9,16 +9,23 @@ final List<String> dummyPoiOffices = [
 ];
 
 class PoiScreenRoute extends MaterialPageRoute {
-  PoiScreenRoute() : super(builder: (context) => new PoiScreen());
+
+  Poi poi;
+
+  PoiScreenRoute({this.poi}) : super(builder: (context) => new PoiScreen(poi: poi));
 }
 
 class PoiScreen extends StatelessWidget {
+
+  Poi poi;
+  PoiScreen({this.poi});
+
   @override
   Widget build(BuildContext context) {
     return new WillPopScope(
       child: new Scaffold(
         
-        body: FourthFragment()
+        body: FourthFragment(poi: this.poi)
       ),
       onWillPop: () {
         return new Future(() => true);
@@ -28,6 +35,10 @@ class PoiScreen extends StatelessWidget {
 }
 
 class FourthFragment extends StatefulWidget {
+
+  final Poi poi;
+  const FourthFragment({this.poi});
+
   @override 
   FourthFragmentState createState() => FourthFragmentState();
 }
@@ -38,7 +49,7 @@ class FourthFragmentState extends State<FourthFragment> {
     return new Center(
       child: new Scaffold(
         appBar: new AppBar(
-          title: Text(Poi.getFakePOI().name, style: TextStyle(color: Colors.white))
+          title: Text(widget.poi.name, style: TextStyle(color: Colors.white))
         ),
         body: Container(
           padding: EdgeInsets.all(10), 
@@ -57,7 +68,7 @@ class FourthFragmentState extends State<FourthFragment> {
                 child:Center(
                   child: Column(
                     children: <Widget>[
-                      Text("Put image of building front here")
+                      Text("Put image of building front here") // TODO widget.poi.building_image
                     ],
                   )
                 )
@@ -72,7 +83,7 @@ class FourthFragmentState extends State<FourthFragment> {
                   child: Column(
                     children: <Widget>[
                       Text("Description", textAlign: TextAlign.left, style: TextStyle(fontSize: 16.0, fontWeight: FontWeight.bold)),
-                      Text(Poi.getFakePOI().description, textAlign: TextAlign.left)
+                      Text(widget.poi.description, textAlign: TextAlign.left)
                     ],
                   )
                 )

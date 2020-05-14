@@ -33,23 +33,9 @@ class DB {
           "type TEXT,"
           "primary key (latitude, longitude)"
           ");");
-    // create dummy poi
-    // TODO put real pois here
-    await createPoi(db, Poi(
-      name: "Eric Johnson Science Center",
-      latitude: 47.753481,
-      longitude: -117.417527,
-      type: "OFFICE",
-      interactive: true,
-      description: "Home to the Math/CS, Physics, and part of the Biology department. Dedicated in 1966, this building houses the main labs for plant and animal biology, physics and the computer labs for CS classes, as well as the second largest lecture hall on campus."
-    ));
-    await createPoi(db, Poi(
-      latitude: 47.752671,
-      longitude: -117.417714,
-      name: "2",
-      type: "RESIDENCE_HALL"));
-  }
 
+    await DB.createDefaultPois(db);
+  }
   //-----------------------------------------------------------
   //                       CONTACT
   //-----------------------------------------------------------
@@ -100,6 +86,75 @@ class DB {
   static Future<int> createPoi(Database db, Poi poi) async {
     var result = await db.insert("poi", poi.toMap());
     return result;
+  }
+
+  static createDefaultPois(Database db) async {
+    await createPoi(db, Poi(
+      latitude: 47.752750,
+      longitude: -117.41894,
+      type: "RESIDENCE_HALL",
+      name: "Warren Hall"
+    ));
+    await createPoi(db, Poi(
+      latitude: 47.753503,
+      longitude: -117.41894,
+      type: "RESIDENCE_HALL",
+      name: "Ballard Hall"
+    ));
+    await createPoi(db, Poi(
+      latitude: 47.754025,
+      longitude: -117.41977,
+      type: "RESIDENCE_HALL",
+      name: "MacMillan Hall"
+    ));
+    await createPoi(db, Poi(
+      latitude: 47.753602,
+      longitude: -117.415455,
+      type: "RESIDENCE_HALL",
+      name: "Arend Hall"
+    ));
+    await createPoi(db, Poi(
+      latitude: 47.753182,
+      longitude: -117.413183,
+      type: "RESIDENCE_HALL",
+      name: "Boppell Hall"
+    ));
+    await createPoi(db, Poi(
+      latitude: 47.753490,
+      longitude: -117.41692,
+      type: "LIBRARY",
+      name: "Library"
+    ));
+    await createPoi(db, Poi(
+      latitude: 47.751880, 
+      longitude: -117.41546,
+      type: "CHURCH",
+      name: "Whitworth Church"
+    ));
+    await createPoi(db, Poi(
+      latitude: 47.754132,
+      longitude: -117.418627,
+      type: "ACADEMIC",
+      name: "Weyerhaeuser"
+    ));
+    await createPoi(db, Poi(
+      latitude: 47.754111, 
+      longitude: -117.415767,
+      type: "ACADEMIC",
+      name: "Eric Johnson Science Center (EJ)"
+    ));
+    await createPoi(db, Poi(
+      latitude: 7.752749,
+      longitude: 117.41523,
+      type: "HUB",
+      name: "Hixun Union Building (HUB)"
+    ));
+    await createPoi(db, Poi(
+      latitude: 47.754429,
+      longitude: -117.416370,
+      type: "ACADEMIC",
+      name: "Robinson Science Building"
+    ));
   }
 
   static Future<List> getAllPois(Database db) async {

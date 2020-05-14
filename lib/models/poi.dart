@@ -17,7 +17,11 @@ class Poi {
     this.poiImage,
     this.type,
     this.interactive
-  });
+  }) {
+    if (this.description == null) {
+      this.description = "";
+    }
+  }
 
   factory Poi.fromJson(Map<String, dynamic> data) => new Poi(
     latitude: data["latitude"],

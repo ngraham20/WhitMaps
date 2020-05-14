@@ -29,37 +29,27 @@ class _MapScreenState extends State<MapScreen> {
 
   void _onMapCreated(GoogleMapController controller) {
     mapController = controller;
-
-    // setState(() {
-    //   _markers.add(
-    //     Marker(
-    //       markerId: MarkerId("YOUAREHERE"),
-    //       position: LatLng(map.latitude, map.longitude),
-    //       icon: defaultPin
-    //     )
-    //   );
-    // });
   }
 
-void updateYAH(){
+// void updateYAH(){
 
 
-  _getCurrentLocation();
-  final marker = _markers.firstWhere((item) => item.markerId == MarkerId("YOUAREHERE"));
+//   _getCurrentLocation();
+//   final marker = _markers.firstWhere((item) => item.markerId == MarkerId("YOUAREHERE"));
 
-  Marker _marker = Marker(
-    markerId: marker.markerId,
-    onTap: marker.onTap,
-    position: LatLng(_currentPosition.latitude, _currentPosition.longitude),
-    icon: marker.icon,
-  );
+//   Marker _marker = Marker(
+//     markerId: marker.markerId,
+//     onTap: marker.onTap,
+//     position: LatLng(_currentPosition.latitude, _currentPosition.longitude),
+//     icon: marker.icon,
+//   );
 
-  setState(() {
-  //the marker is identified by the markerId and not with the index of the list
-    _markers.remove(marker);
-    _markers.add(_marker);
-  });
-}
+//   setState(() {
+//   //the marker is identified by the markerId and not with the index of the list
+//     _markers.remove(marker);
+//     _markers.add(_marker);
+//   });
+// }
 
   @override
   void initState() {
@@ -79,6 +69,18 @@ void updateYAH(){
                 case "RESIDENCE_HALL":
                   icon = rhIcon;
                   break;
+                case "ACADEMIC":
+                  icon = officeIcon;
+                  break;
+                case "HUB":
+                  icon = officeIcon;
+                  break;
+                case "LIBRARY":
+                  icon = officeIcon;
+                  break;
+                case "CHURCH":
+                  icon = officeIcon;
+                  break;
                 default:
                   icon = defaultPin;
                   break;
@@ -91,7 +93,7 @@ void updateYAH(){
                     position: LatLng(poi.latitude, poi.longitude),
                     icon: icon,
                     onTap: () {
-                      Navigator.of(context).push(new PoiScreenRoute());
+                      Navigator.of(context).push(new PoiScreenRoute(poi: poi));
                     }
                   )
                 );
@@ -104,7 +106,6 @@ void updateYAH(){
   void inityahPin() {
     new Timer.periodic(Duration(seconds: 3), (Timer t) {
         _getCurrentLocation();
-
       // updateYAH();
     });
   }
@@ -152,7 +153,7 @@ void updateYAH(){
     map = new WhitMap(
       latitude: 47.753481,
       longitude: -117.417527,
-      zoom: 13.0,
+      zoom: 16,
     );
   }
 
