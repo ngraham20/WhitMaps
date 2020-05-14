@@ -3,9 +3,11 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
+import 'package:sqflite/sqflite.dart';
 import 'package:whitmaps/models/poi.dart';
 import 'package:whitmaps/models/whitmap.dart';
 import 'package:whitmaps/fragments/fourth_fragment.dart';
+import 'package:whitmaps/data/db.dart';
 
 class MapScreen extends StatefulWidget {
   @override
@@ -19,78 +21,42 @@ class _MapScreenState extends State<MapScreen> {
   BitmapDescriptor defaultPin;
   BitmapDescriptor yahPin;
   Set<Marker> _markers = {};
-  Set<Poi> _pois = {};
+  List<Poi> _pois = [];
   GoogleMapController mapController;
   WhitMap map;
   Timer _timer;
   Position _currentPosition;
+  // DB _db;
 
   void _onMapCreated(GoogleMapController controller) {
     mapController = controller;
-    for (var poi in _pois) {
-      var icon;
-      switch (poi.type) {
-        case "OFFICE":
-          icon = officeIcon;
-          break;
-        case "RESIDENCE_HALL":
-          icon = rhIcon;
-          break;
-        default:
-          icon = defaultPin;
-          break;
-        }
-
-      setState(() {
-        _markers.add(
-          Marker(
-            markerId: MarkerId(poi.name),
-            position: LatLng(poi.latitude, poi.longitude),
-            icon: icon,
-            onTap: () {
-              Navigator.of(context).push(new PoiScreenRoute());
-            }
-          )
-        );
-      });
-    }
-
-    // setState(() {
-    //   _markers.add(
-    //     Marker(
-    //       markerId: MarkerId("YOUAREHERE"),
-    //       position: LatLng(map.latitude, map.longitude),
-    //       icon: defaultPin
-    //     )
-    //   );
-    // });
   }
 
   @override
-void dispose() {
-  _timer.cancel();
-  super.dispose();
-}
+  void dispose() {
+    _timer.cancel();
+    super.dispose();
+  }
 
-void updateYAH(){
+  void updateYAH(){
 
 
-  _getCurrentLocation();
-  final marker = _markers.firstWhere((item) => item.markerId == MarkerId("YOUAREHERE"));
+    _getCurrentLocation();
+    final marker = _markers.firstWhere((item) => item.markerId == MarkerId("YOUAREHERE"));
 
-  Marker _marker = Marker(
-    markerId: marker.markerId,
-    onTap: marker.onTap,
-    position: LatLng(_currentPosition.latitude, _currentPosition.longitude),
-    icon: marker.icon,
-  );
+    Marker _marker = Marker(
+      markerId: marker.markerId,
+      onTap: marker.onTap,
+      position: LatLng(_currentPosition.latitude, _currentPosition.longitude),
+      icon: marker.icon,
+    );
 
-  setState(() {
-  //the marker is identified by the markerId and not with the index of the list
-    _markers.remove(marker);
-    _markers.add(_marker);
-  });
-}
+    setState(() {
+    //the marker is identified by the markerId and not with the index of the list
+      _markers.remove(marker);
+      _markers.add(_marker);
+    });
+  }
 
   @override
   void initState() {
@@ -99,13 +65,54 @@ void updateYAH(){
       setRHPin();
       setDefaultPin();
       inityahPin();
-      _pois = Poi.getPois();
+      DB.createDatabase().then((value) {
+         Poi.getPois(value).then((pval) {
+            for (var poi in pval) {
+              var icon;
+              switch (poi.type) {
+                case "OFFICE":
+                  icon = officeIcon;
+                  break;
+                case "RESIDENCE_HALL":
+                  icon = rhIcon;
+                  break;
+                case "ACADEMIC":
+                  icon = officeIcon;
+                  break;
+                case "HUB":
+                  icon = officeIcon;
+                  break;
+                case "LIBRARY":
+                  icon = officeIcon;
+                  break;
+                case "CHURCH":
+                  icon = officeIcon;
+                  break;
+                default:
+                  icon = defaultPin;
+                  break;
+                }
+
+              setState(() {
+                _markers.add(
+                  Marker(
+                    markerId: MarkerId(poi.name),
+                    position: LatLng(poi.latitude, poi.longitude),
+                    icon: icon,
+                    onTap: () {
+                      Navigator.of(context).push(new PoiScreenRoute(poi: poi));
+                    }
+                  )
+                );
+              });
+            }
+         });
+      });
   }
 
   void inityahPin() {
     _timer = Timer.periodic(Duration(seconds: 3), (Timer t) {
         _getCurrentLocation();
-
       // updateYAH();
     });
   }
@@ -153,7 +160,7 @@ void updateYAH(){
     map = new WhitMap(
       latitude: 47.753481,
       longitude: -117.417527,
-      zoom: 13.0,
+      zoom: 16,
     );
   }
 

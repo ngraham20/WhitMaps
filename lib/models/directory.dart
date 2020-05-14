@@ -31,18 +31,18 @@ class Directory {
     history.add(DirHistory(Transaction.removeContact, contact));
   }
 
-  void save() {
-    Database db = DB.createDatabase();
-    while (!history.isEmpty) {
-      var transaction = history.removeFirst();
-      if (transaction.trans == Transaction.addContact) {
-        DB.createContact(db, transaction.contact);
-      }
-      else {
-        DB.deleteContact(db, transaction.contact);
-      }
-    }
-  }
+  // void save() {
+  //   Database db = DB.createDatabase();
+  //   while (!history.isEmpty) {
+  //     var transaction = history.removeFirst();
+  //     if (transaction.trans == Transaction.addContact) {
+  //       DB.createContact(db, transaction.contact);
+  //     }
+  //     else {
+  //       DB.deleteContact(db, transaction.contact);
+  //     }
+  //   }
+  // }
   //alphabetize??
   //these are accurate phone numbers
   static List<Contact> getPhoneBookList() {

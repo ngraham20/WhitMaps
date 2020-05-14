@@ -1,3 +1,6 @@
+import 'package:sqflite/sqflite.dart';
+import 'package:whitmaps/data/db.dart';
+
 class Poi {
   double latitude;
   double longitude;
@@ -14,7 +17,11 @@ class Poi {
     this.poiImage,
     this.type,
     this.interactive
-  });
+  }) {
+    if (this.description == null) {
+      this.description = "";
+    }
+  }
 
   factory Poi.fromJson(Map<String, dynamic> data) => new Poi(
     latitude: data["latitude"],
@@ -44,13 +51,12 @@ class Poi {
       description: "Home to the Math/CS, Physics, and part of the Biology department. Dedicated in 1966, this building houses the main labs for plant and animal biology, physics and the computer labs for CS classes, as well as the second largest lecture hall on campus."
     );
   }
-  static Set<Poi> getPois() {
-    return {
-      getFakePOI(),
-      Poi(latitude: 47.752671,
-      longitude: -117.417714,
-      name: "2",
-      type: "RESIDENCE_HALL"),
-    };
+  static Future<List<Poi>> getPois(db) async {
+    List<Poi> result = [];
+    var pois = await DB.getAllPois(db);
+    for (var item in pois) {
+      result.add(Poi.fromJson(item));
+    }
+    return result;
   }
 }
