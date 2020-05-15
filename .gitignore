@@ -2,10 +2,12 @@
 .dart_tool
 .packages
 *.lock
-
+.DS_STORE
 # Generated files
 build
 coverage
 doc/api
 .vscode
 .idea
+.flutter-plugins
+.flutter-plugins-dependencies
