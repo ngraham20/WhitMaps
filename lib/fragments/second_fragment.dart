@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:whitmaps/models/directory.dart';
 import 'package:whitmaps/models/contact.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 final List<Contact> entries = Directory.getPhoneBookList();
 
@@ -32,7 +33,7 @@ class SecondFragmentState extends State<SecondFragment> {
                     )
                   ),
                   RaisedButton(
-                    onPressed: (){},
+                    onPressed: () => _makeCall(entries[index].primaryPhone),
                     color: Colors.red,
                     textColor: Colors.white, 
                     child: Text("Call " + formatPhone(entries[index])
@@ -47,6 +48,15 @@ class SecondFragmentState extends State<SecondFragment> {
       ),
       ),
     );
+  }
+
+  _makeCall(String phone) async {
+    final url = 'tel://$phone';
+    if (await canLaunch(url)) {
+      await launch(url);
+    } else {
+      throw 'Could not launch $url';
+    }
   }
   
   String formatPhone(Contact contact) {

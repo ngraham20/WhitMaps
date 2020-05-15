@@ -18,6 +18,11 @@ class _MapScreenState extends State<MapScreen> {
 
   BitmapDescriptor officeIcon;
   BitmapDescriptor rhIcon;
+  BitmapDescriptor chapelIcon;
+  BitmapDescriptor hubPin;
+  BitmapDescriptor libraryPin;
+  BitmapDescriptor healthIcon;
+  BitmapDescriptor sportIcon;
   BitmapDescriptor defaultPin;
   BitmapDescriptor yahPin;
   Set<Marker> _markers = {};
@@ -63,6 +68,11 @@ class _MapScreenState extends State<MapScreen> {
       super.initState();
       setOfficePin();
       setRHPin();
+      setChapelPin();
+      setLibraryPin();
+      setHubPin();
+      setHealthPin();
+      setSportPin();
       setDefaultPin();
       inityahPin();
       DB.createDatabase().then((value) {
@@ -70,23 +80,29 @@ class _MapScreenState extends State<MapScreen> {
             for (var poi in pval) {
               var icon;
               switch (poi.type) {
-                case "OFFICE":
-                  icon = officeIcon;
-                  break;
                 case "RESIDENCE_HALL":
                   icon = rhIcon;
+                  break;
+                case "HOUSE":
+                  icon = rhIcon;
+                  break;
+                case "LIBRARY":
+                  icon = libraryPin;
+                  break;
+                case "HUB":
+                  icon = hubPin;
                   break;
                 case "ACADEMIC":
                   icon = officeIcon;
                   break;
-                case "HUB":
-                  icon = officeIcon;
+                case "CHAPEL":
+                  icon = chapelIcon;
                   break;
-                case "LIBRARY":
-                  icon = officeIcon;
+                case "HEALTH":
+                  icon = healthIcon;
                   break;
-                case "CHURCH":
-                  icon = officeIcon;
+                case "SPORTS":
+                  icon = sportIcon;
                   break;
                 default:
                   icon = defaultPin;
@@ -120,26 +136,51 @@ class _MapScreenState extends State<MapScreen> {
   void setOfficePin() async {
     officeIcon = await BitmapDescriptor.fromAssetImage(
       ImageConfiguration(devicePixelRatio: 2.5),
-      'assets/office-32.png');
+      'assets/poi_icons/office-32.png');
+  }
+    void setLibraryPin() async {
+    libraryPin = await BitmapDescriptor.fromAssetImage(
+      ImageConfiguration(devicePixelRatio: 2.5),
+      'assets/poi_icons/library-32.png');
+  }
+    void setHubPin() async {
+    hubPin = await BitmapDescriptor.fromAssetImage(
+      ImageConfiguration(devicePixelRatio: 2.5),
+      'assets/poi_icons/hub-32.png');
   }
 
   void setRHPin() async {
     rhIcon = await BitmapDescriptor.fromAssetImage(
     ImageConfiguration(devicePixelRatio: 2.5),
-    'assets/residence-hall-32.png');
+    'assets/poi_icons/residence-hall-32.png');
   }
 
   void setDefaultPin() async {
     defaultPin = await BitmapDescriptor.fromAssetImage(
     ImageConfiguration(devicePixelRatio: 2.5),
-    'assets/purplecheck.png');
+    'assets/poi_icons/default.png');
+  }
+    void setChapelPin() async {
+    chapelIcon = await BitmapDescriptor.fromAssetImage(
+    ImageConfiguration(devicePixelRatio: 2.5),
+    'assets/poi_icons/chapel-32.png');
+  }
+    void setHealthPin() async {
+    healthIcon = await BitmapDescriptor.fromAssetImage(
+    ImageConfiguration(devicePixelRatio: 2.5),
+    'assets/poi_icons/health-32.png');
+  }
+    void setSportPin() async {
+    sportIcon = await BitmapDescriptor.fromAssetImage(
+    ImageConfiguration(devicePixelRatio: 2.5),
+    'assets/poi_icons/sport-32.png');
   }
 
-  void setYAHPin() async {
-    yahPin = await BitmapDescriptor.fromAssetImage(
-      ImageConfiguration(devicePixelRatio: 2.5),
-      'assets/purplecheck.png');
-  }
+  // void setYAHPin() async {
+  //   yahPin = await BitmapDescriptor.fromAssetImage(
+  //     ImageConfiguration(devicePixelRatio: 2.5),
+  //     'assets/purplecheck.png');
+  // }
 
   _getCurrentLocation() {
     final Geolocator geolocator = Geolocator()..forceAndroidLocationManager;
