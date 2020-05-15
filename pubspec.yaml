@@ -32,6 +32,7 @@ dependencies:
   permission_handler: ^4.4.0+hotfix.2
 
 dev_dependencies:
+  flutter_launcher_icons: "^0.7.0"
   flutter_test:
     sdk: flutter
   # Added this for GMaps plugin
@@ -39,6 +40,12 @@ dev_dependencies:
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
+
+flutter_icons:
+  ios: true
+  android: true
+  image_path_android: "assets/launcher/icon.png"
+  image_path_ios: "assets/launcher/icon.png"
 
 # The following section is specific to Flutter.
 flutter:
@@ -50,9 +57,12 @@ flutter:
 
   # To add assets to your application, add an assets section, like this:
   assets:
-    - assets/purplecheck.png
-    - assets/office-32.png
-    - assets/residence-hall-32.png
+    # - assets/purplecheck.png
+    # - assets/office-32.png
+    # - assets/residence-hall-32.png
+    - assets/
+    - assets/poi_icons/
+    - assets/poi_images/
   #  - images/a_dot_burr.jpeg
   #  - images/a_dot_ham.jpeg
 

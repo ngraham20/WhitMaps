@@ -68,7 +68,7 @@ class FourthFragmentState extends State<FourthFragment> {
                 child:Center(
                   child: Column(
                     children: <Widget>[
-                      Text("Put image of building front here") // TODO widget.poi.building_image
+                      Image.asset(widget.poi.poiImage)
                     ],
                   )
                 )
