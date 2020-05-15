@@ -386,6 +386,15 @@ await createPoi(db, Poi(
       description: "The English department, World Languages department, and Kinesiology department are all located in Westminster."
     ));
 
+    await createPoi(db, Poi(
+      latitude: 47.751602,
+      longitude: -117.411737,
+      type: "ACADEMIC",
+      name: "Hawthorne Hall",
+      poiImage: "assets/poi_images/hawthorne.jpg",
+      description: "Located on the corner of Hawthorne Road and Division Street, Hawthorne Hall houses a variety of class types, as well as the school of continuing studies, intstitutional advancement, the Whitworth Foundation, and Whitworth's printing and mailing services."
+    ));
+
   }
 
   static Future<List> getAllPois(Database db) async {
