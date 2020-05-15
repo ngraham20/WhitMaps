@@ -109,9 +109,9 @@ class DB {
       latitude: 47.754083,
       longitude: -117.419761,
       type: "RESIDENCE_HALL",
-      name: "MThe only all-male residence hall on campus, McMillan houses about 75 residents. McMillan, or “Mac” as it’s often called, organized the Mac Hall Haunted House each year. Ballard and McMillan are considered one community in 2 separate buildings and are referred to collectively as BMAC.cMillan Hall",
+      name: "McMillan Hall",
       poiImage: "assets/poi_images/mac.jpg",
-      description: ""
+      description: "The only all-male residence hall on campus, McMillan houses about 75 residents. McMillan, or “Mac” as it’s often called, organized the Mac Hall Haunted House each year. Ballard and McMillan are considered one community in 2 separate buildings and are referred to collectively as BMAC."
     ));
     await createPoi(db, Poi( 
       latitude: 47.753329,
@@ -181,8 +181,8 @@ class DB {
     ));
 
     await createPoi(db, Poi( 
-      latitude: 47.754258,
-      longitude: -117.417108,
+      latitude: 47.755019,
+      longitude: -117.418472,
       type: "ACADEMIC",
       name: "Lied Center for the Visual Arts",
       poiImage: "assets/poi_images/art.jpg",

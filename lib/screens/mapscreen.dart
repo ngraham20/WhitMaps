@@ -19,6 +19,8 @@ class _MapScreenState extends State<MapScreen> {
   BitmapDescriptor officeIcon;
   BitmapDescriptor rhIcon;
   BitmapDescriptor chapelIcon;
+  BitmapDescriptor hubPin;
+  BitmapDescriptor libraryPin;
   BitmapDescriptor healthIcon;
   BitmapDescriptor sportIcon;
   BitmapDescriptor defaultPin;
@@ -67,6 +69,8 @@ class _MapScreenState extends State<MapScreen> {
       setOfficePin();
       setRHPin();
       setChapelPin();
+      setLibraryPin();
+      setHubPin();
       setHealthPin();
       setSportPin();
       setDefaultPin();
@@ -78,6 +82,15 @@ class _MapScreenState extends State<MapScreen> {
               switch (poi.type) {
                 case "RESIDENCE_HALL":
                   icon = rhIcon;
+                  break;
+                case "HOUSE":
+                  icon = rhIcon;
+                  break;
+                case "LIBRARY":
+                  icon = libraryPin;
+                  break;
+                case "HUB":
+                  icon = hubPin;
                   break;
                 case "ACADEMIC":
                   icon = officeIcon;
@@ -124,6 +137,16 @@ class _MapScreenState extends State<MapScreen> {
     officeIcon = await BitmapDescriptor.fromAssetImage(
       ImageConfiguration(devicePixelRatio: 2.5),
       'assets/poi_icons/office-32.png');
+  }
+    void setLibraryPin() async {
+    libraryPin = await BitmapDescriptor.fromAssetImage(
+      ImageConfiguration(devicePixelRatio: 2.5),
+      'assets/poi_icons/library-32.png');
+  }
+    void setHubPin() async {
+    hubPin = await BitmapDescriptor.fromAssetImage(
+      ImageConfiguration(devicePixelRatio: 2.5),
+      'assets/poi_icons/hub-32.png');
   }
 
   void setRHPin() async {
